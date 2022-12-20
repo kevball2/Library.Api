@@ -4,7 +4,7 @@ namespace Library.Api.Data
 {
     public class DatabaseInitializer
     {
-        private  readonly IDbConnectionFactory _connectionFactory;
+        private readonly IDbConnectionFactory _connectionFactory;
 
         public DatabaseInitializer(IDbConnectionFactory connectionFactory)
         {
@@ -16,12 +16,12 @@ namespace Library.Api.Data
             using var connection = await _connectionFactory.CreateConnectionAsync();
             await connection.ExecuteAsync(
                 @"CREATE TABLE IF NOT EXISTS Books (
-                Isbn TEXT PRIMARY KEY,
-                Title TEXT NOT NULL,
-                Author TEXT NOT NULL, 
-                ShortDescription TEXT NOT NULL,
-                Page Count INTEGER,
-                ReleaseDate TEXT NOT NULL)"
+            Isbn TEXT PRIMARY KEY,
+            Title TEXT NOT NULL,
+            Author TEXT NOT NULL, 
+            ShortDescription TEXT NOT NULL,
+            Page Count INTEGER,
+            ReleaseDate TEXT NOT NULL)"
             );
         }
     }

@@ -6,4 +6,5 @@ namespace Library.Api.Data
     {
         Task<IDbConnection> CreateConnectionAsync();
     }
+
 }
