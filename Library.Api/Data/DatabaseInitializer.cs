@@ -20,7 +20,7 @@ namespace Library.Api.Data
             Title TEXT NOT NULL,
             Author TEXT NOT NULL, 
             ShortDescription TEXT NOT NULL,
-            Page Count INTEGER,
+            PageCount INTEGER,
             ReleaseDate TEXT NOT NULL)"
             );
         }

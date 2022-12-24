@@ -6,7 +6,7 @@ public interface IBookService
 {
     public Task<bool> CreateAsync(Book book);
 
-    public Task<Book> GetByIsbnAsync(string isbn);
+    public Task<Book?> GetByIsbnAsync(string isbn);
     
     public Task<IEnumerable<Book>> GetAllAsync();
     

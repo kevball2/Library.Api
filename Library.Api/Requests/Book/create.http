@@ -1,0 +1,27 @@
+@hostname = localhost
+@port = 7105
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+POST https://{{host}}/books
+Content-Type:{{contentType}}
+
+{
+    "isbn": "987-013081073",
+    "title": "The Clearn Coder",
+    "author": "Robert C. Martin",
+    "shortDescription": "In the Clean Coder: a code of Conduct for professional programmers, legendary software expert Robert C. Martin
+        introduces the disciplines, techniques, tools, and practices of true software craftmanship",
+    "pageCount": 242,
+    "releaseDate": "2011-03-13"
+
+}
+
+###
+
+# Comments
+GET https://{{host}}/authors/
+
+###
+
+GET https://www.bing.com

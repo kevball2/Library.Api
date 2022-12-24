@@ -1,3 +1,4 @@
+using Dapper;
 using Library.Api.Data;
 using Library.Api.Models;
 
@@ -19,7 +20,12 @@ public class BookService : IBookService
         //{
         //    return false;
         //}
-
+        using var connection = await _connectionFactory.CreateConnectionAsync();
+        var result = await connection.ExecuteAsync(
+            @"INSERT INTO Books (Isbn, Title, Author, ShortDescription, PageCount, ReleaseDate)
+            VALUES (@Isbn, @Title, @Author, @ShortDescription, @PageCount, @ReleaseDate)",
+            book);
+        return result > 0;
     }
 
     public Task<bool> DeleteAsync(string isbn)
