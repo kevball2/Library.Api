@@ -1,0 +1,7 @@
+@hostname = localhost
+@port = 7105
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+GET https://{{host}}/books
+

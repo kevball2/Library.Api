@@ -23,6 +23,7 @@ app.UseSwaggerUI();
 app.MapPost("books", async (Book book, IBookService bookService, 
     IValidator<Book> validator) =>
 {
+
     var validationResult = await validator.ValidateAsync(book);
     if (!validationResult.IsValid)
     {
@@ -39,6 +40,48 @@ app.MapPost("books", async (Book book, IBookService bookService,
     }
 
     return Results.Created($"/books/{book.Isbn}", book);
+});
+
+app.MapPut("books/{isbn}", async (Book book, IBookService bookService,
+    IValidator<Book> validator, string isbn) =>
+{
+    book.Isbn = isbn;
+    var validationResult = await validator.ValidateAsync(book);
+    if (!validationResult.IsValid)
+    {
+        return Results.BadRequest(validationResult.Errors);
+    }
+
+    var updated = await bookService.UpdateAsync(book);
+    return updated ? Results.Ok(book) : Results.NotFound();
+
+    
+});
+
+app.MapGet("books", async (IBookService BookService, string? searchTerm) =>
+{
+    if (searchTerm is not null && !string.IsNullOrWhiteSpace(searchTerm))
+    {
+        var matchedBooks = await BookService.SearchByTitleAsync(searchTerm);
+        return Results.Ok(matchedBooks);
+    }
+
+    var books = await BookService.GetAllAsync();
+    return Results.Ok(books);
+});
+
+
+app.MapGet("books/{isbn}", async (string isbn, IBookService BookService) =>
+{
+    var book = await BookService.GetByIsbnAsync(isbn);
+    return book is not null ?  Results.Ok(book) : Results.NotFound();
+});
+
+app.MapDelete("books/{isbn}", async (string isbn, IBookService BookService) =>
+{
+    var deleted = await BookService.DeleteAsync(isbn);
+     
+    return deleted ? Results.NoContent() : Results.NotFound();
 });
 
 var databaseInitializer = app.Services.GetRequiredService<DatabaseInitializer>();

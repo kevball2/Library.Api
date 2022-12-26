@@ -3,12 +3,13 @@
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 
+#Create new book
 POST https://{{host}}/books
 Content-Type:{{contentType}}
 
 {
     "isbn": "987-013081073",
-    "title": "The Clearn Coder",
+    "title": "The Clean Coder",
     "author": "Robert C. Martin",
     "shortDescription": "In the Clean Coder: a code of Conduct for professional programmers, legendary software expert Robert C. Martin
         introduces the disciplines, techniques, tools, and practices of true software craftmanship",
@@ -17,11 +18,35 @@ Content-Type:{{contentType}}
 
 }
 
-###
 
-# Comments
-GET https://{{host}}/authors/
+### Update Book 
 
-###
+PUT https://{{host}}/books/987-013081073
+Content-Type:{{contentType}}
 
-GET https://www.bing.com
+{
+    "isbn": "987-013081073",
+    "title": "The Clean Coder",
+    "author": "Robert C. Martin",
+    "shortDescription": "In the Clean Coder: a code of Conduct for professional programmers, legendary software expert Robert C. Martin
+        introduces the disciplines, techniques, tools, and practices of true software craftmanship",
+    "pageCount": 242,
+    "releaseDate": "2011-03-13"
+
+}
+
+### Get all books
+
+
+GET https://{{host}}/books
+
+
+### Get By isbn
+
+GET https://{{host}}/books/987-013081073
+
+
+### Get By isbn
+
+GET https://{{host}}/books?searchTerm=Clearn
+
