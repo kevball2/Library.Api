@@ -3,9 +3,11 @@
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 
+
 #Create new book
 POST https://{{host}}/books
 Content-Type:{{contentType}}
+#Authorization: VerySecret1
 
 {
     "isbn": "987-013081073",
@@ -46,7 +48,10 @@ GET https://{{host}}/books
 GET https://{{host}}/books/987-013081073
 
 
-### Get By isbn
+### Get By Search Term
 
 GET https://{{host}}/books?searchTerm=Clearn
 
+### Delete By isbn
+
+Delete https://{{host}}/books/987-013081073
